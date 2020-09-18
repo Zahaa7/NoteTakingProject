@@ -1,12 +1,15 @@
 package ro.jademy.notetaking;
 
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import java.io.FileReader;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import ro.jademy.notetaking.model.Note;
+import ro.jademy.notetaking.model.TimeStamp;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 
@@ -45,16 +48,26 @@ public class NoteApp {
         System.out.println("         +---------------------------+         ");
     }
 
-    public void readJson() {
-        System.out.println();
-        JSONParser parser = new JSONParser();
-        try {
-            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("notes.json"));
-            for (Object o : jsonArray) {
-                System.out.println(o.toString());
-            }
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
-        }
+    public void readJsonFile() throws IOException {
+        byte[] jsonDataFile = Files.readAllBytes(Paths.get("notes.json"));
+        ObjectMapper objectMapper = new ObjectMapper();
+        Note[] note = objectMapper.readValue(jsonDataFile, Note[].class);
+        System.out.println("Note\n" + note);
+        Note newNote = createNote();
+        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        StringWriter stringWriter = new StringWriter();
+        objectMapper.writeValue(stringWriter, newNote);
+        System.out.println("Note JSON is\n" + stringWriter);
+    }
+
+    private Note createNote() {
+        Note note = new Note();
+        note.setTitle(INPUT.nextLine());
+        note.setBody(INPUT.nextLine());
+        TimeStamp timeStamp = new TimeStamp();
+        timeStamp.setCreationDate(LocalDate.now());
+        timeStamp.setUpdateDate(LocalDate.now()); // de schimbat cu data si ora cand il editeaza
+        note.setTimestamp(timeStamp);
+        return note;
     }
 }
