@@ -4,20 +4,57 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import ro.jademy.notetaking.model.Note;
 import ro.jademy.notetaking.model.TimeStamp;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 public class NoteApp {
 
-    private final Path path = Paths.get("notes.json");
-    private static final Scanner INPUT = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm a");
+
+    public void initiateNoteApp() {
+        do {
+            displayMainMenu();
+            try {
+                byte option = input.nextByte();
+                switch (option) {
+                    case 1: // Create a New Note
+                        try {
+                            writeJsonFile();
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                        break;
+                    case 2: // View All Notes By
+                        displayViewMenu();
+                        break;
+                    case 3: // View Note Content
+
+                        break;
+                    case 4: // Delete Note
+
+                        break;
+                    case 5: // Exit Note App
+                        System.exit(0);
+                        break;
+                    default: // For invalid inputs
+                        System.out.println("Invalid input. Please, choose between [1-5] only!");
+                }
+            } catch (InputMismatchException mismatchException) {
+                System.out.println("Invalid input. Please, choose only the displayed options!");
+                input = new Scanner(System.in); // to break the loop
+            }
+        } while (true);
+    }
+
 
     private void displayMainMenu() {
         System.out.println();
@@ -49,26 +86,30 @@ public class NoteApp {
         System.out.println("         +---------------------------+         ");
     }
 
-    public void readJsonFile() throws IOException {
+    private void readJsonFile() throws IOException {
         byte[] jsonDataFile = Files.readAllBytes(Paths.get("notes.json"));
-        ObjectMapper objectMapper = new ObjectMapper();
         Note[] note = objectMapper.readValue(jsonDataFile, Note[].class);
         System.out.println("\n" + Arrays.toString(note));
-        Note newNote = createNote();
-        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        StringWriter stringWriter = new StringWriter();
-        objectMapper.writeValue(stringWriter, newNote);
-        System.out.println("Note JSON is\n" + stringWriter);
     }
 
     private Note createNote() {
         Note note = new Note();
-        note.setTitle(INPUT.nextLine());
-        note.setBody(INPUT.nextLine());
-        TimeStamp timeStamp = new TimeStamp();
-        timeStamp.setCreationDate(INPUT.nextLong());
-        timeStamp.setUpdateDate(INPUT.nextLong()); // de schimbat cu data si ora cand il editeaza
-        note.setTimestamp(timeStamp);
+        System.out.println("Title: ");
+        input.skip("\n");
+        note.setTitle(input.nextLine());
+        System.out.println("Text: ");
+        note.setBody(input.nextLine());
+        //TimeStamp timeStamp = new TimeStamp();
+        //timeStamp.setCreationDate();
+        //timeStamp.setUpdateDate(input.nextLong()); // de schimbat cu data si ora cand il editeaza
+        //note.setTimestamp(timeStamp);
         return note;
+    }
+
+    private void writeJsonFile() throws IOException {
+        Note newNote = createNote();
+        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        objectMapper.writeValue(new FileOutputStream("notes.json"), newNote);
+        System.out.println("File wrote successfully!");
     }
 }

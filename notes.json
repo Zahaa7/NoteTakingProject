@@ -1,19 +1,5 @@
-[
-  {
-    "title": "Title",
-    "body": "Lorem ipsum sit dolor",
-    "timestamp": {
-      "creationDate": "",
-      "updateDate": ""
-    }
-  },
-
-  {
-    "title": "Title",
-    "body": "Lorem ipsum sit dolor",
-    "timestamp": {
-      "creationDate": "",
-      "updateDate": ""
-    }
-  }
-]
+{
+  "title" : "asd",
+  "body" : "asd",
+  "timestamp" : null
+}
