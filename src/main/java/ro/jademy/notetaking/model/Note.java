@@ -6,6 +6,9 @@ public class Note {  // a note's blueprint
     private String body;
     private TimeStamp timestamp;
 
+    public Note() {
+    }
+
     public Note(String title, String body, TimeStamp timestamp) {
         this.title = title;
         this.body = body;

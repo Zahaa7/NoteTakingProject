@@ -7,6 +7,9 @@ public class TimeStamp {
     private Date creationDate;
     private Date updateDate;
 
+    public TimeStamp() {
+    }
+
     public TimeStamp(Date creationDate, Date updateDate) {
         this.creationDate = creationDate;
         this.updateDate = updateDate;
