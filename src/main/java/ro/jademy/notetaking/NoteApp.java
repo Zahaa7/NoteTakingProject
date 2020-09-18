@@ -65,8 +65,8 @@ public class NoteApp {
         note.setTitle(INPUT.nextLine());
         note.setBody(INPUT.nextLine());
         TimeStamp timeStamp = new TimeStamp();
-        timeStamp.setCreationDate(LocalDate.now());
-        timeStamp.setUpdateDate(LocalDate.now()); // de schimbat cu data si ora cand il editeaza
+        timeStamp.setCreationDate(INPUT.nextLong());
+        timeStamp.setUpdateDate(INPUT.nextLong()); // de schimbat cu data si ora cand il editeaza
         note.setTimestamp(timeStamp);
         return note;
     }

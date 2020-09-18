@@ -1,33 +1,31 @@
 package ro.jademy.notetaking.model;
 
-import java.time.LocalDate;
-
 public class TimeStamp {
 
-    private LocalDate creationDate;
-    private LocalDate updateDate;
+    private Long creationDate;
+    private Long updateDate;
 
     public TimeStamp() {
     }
 
-    public TimeStamp(LocalDate creationDate, LocalDate updateDate) {
+    public TimeStamp(Long creationDate, Long updateDate) {
         this.creationDate = creationDate;
         this.updateDate = updateDate;
     }
 
-    public LocalDate getCreationDate() {
+    public Long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
+    public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 
-    public LocalDate getUpdateDate() {
+    public Long getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalDate updateDate) {
+    public void setUpdateDate(Long updateDate) {
         this.updateDate = updateDate;
     }
 
