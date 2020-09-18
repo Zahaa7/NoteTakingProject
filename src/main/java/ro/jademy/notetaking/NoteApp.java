@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -52,7 +53,7 @@ public class NoteApp {
         byte[] jsonDataFile = Files.readAllBytes(Paths.get("notes.json"));
         ObjectMapper objectMapper = new ObjectMapper();
         Note[] note = objectMapper.readValue(jsonDataFile, Note[].class);
-        System.out.println("Note\n" + note);
+        System.out.println("\n" + Arrays.toString(note));
         Note newNote = createNote();
         objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         StringWriter stringWriter = new StringWriter();

@@ -31,6 +31,6 @@ public class TimeStamp {
 
     @Override
     public String toString() {
-        return getCreationDate() + ", " + getUpdateDate();
+        return "Creation Date: " + getCreationDate() + "\nUpdate Date: " + getUpdateDate();
     }
 }

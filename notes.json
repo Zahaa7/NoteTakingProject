@@ -1,7 +1,7 @@
 [
   {
-    "title": "",
-    "body": "",
+    "title": "Title",
+    "body": "Lorem ipsum sit dolor",
     "timestamp": {
       "creationDate": "",
       "updateDate": ""
@@ -9,10 +9,10 @@
   },
 
   {
-    "title": "",
-    "body": "",
+    "title": "Title",
+    "body": "Lorem ipsum sit dolor",
     "timestamp": {
-      "creationDate ": "",
+      "creationDate": "",
       "updateDate": ""
     }
   }

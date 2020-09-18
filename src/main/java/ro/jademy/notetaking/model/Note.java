@@ -42,11 +42,11 @@ public class Note {  // a note's blueprint
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("~~~~~ Employee Details ~~~~~\n");
-        sb.append("Title:" + getTitle() + "\n");
-        sb.append("Body:" + getBody() + "\n");
-        sb.append("Timestamp:" + getTimestamp() + "\n");
-        sb.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ");
+        sb.append("\n~~~~~ Note Details ~~~~~\n");
+        sb.append("Title: " + getTitle() + "\n");
+        sb.append("Body: " + getBody() + "\n");
+        sb.append(getTimestamp().toString() +"\n");
+        sb.append("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         return sb.toString();
     }
 }
