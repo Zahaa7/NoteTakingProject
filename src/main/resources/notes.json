@@ -12,7 +12,7 @@
   },
 
   {"title": "Features to Note Taking Project",
-    "body": "TODO: Implement a category enum and a pin to favorite functionality",
+    "body": "Implement a category enum and a pin to favorite functionality",
     "creationDate": "1600511350825",
     "modificationDate": "1600511350825",
     "markedAsFinished" : false,

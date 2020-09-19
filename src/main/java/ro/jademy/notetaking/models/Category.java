@@ -1,4 +1,4 @@
-package ro.jademy.notetaking.model;
+package ro.jademy.notetaking.models;
 
 public enum Category {
 

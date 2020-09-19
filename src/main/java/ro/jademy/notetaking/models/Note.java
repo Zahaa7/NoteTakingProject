@@ -1,7 +1,8 @@
-package ro.jademy.notetaking.model;
+package ro.jademy.notetaking.models;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class Note {
 
@@ -92,12 +93,13 @@ public class Note {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd/MMM/yyyy HH:mm a");
-        return title + "\n" +
-                "Created on " + sdf.format(creationDate) + "\n" +
-                "Last modified on" + sdf.format(modificationDate) + "\n" +
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd/MMM/yyyy HH:mm a", Locale.ENGLISH);
+        return "\n" + title + "\n" +
                 body + "\n" +
-                "Note is marked as done :"+markedAsFinished+"\n"+
-                "Hashtags " + hashtagList.toString() + "."+"\n\n";
+                "Created on: " + sdf.format(creationDate) + "\n" +
+                "Last modified on: " + sdf.format(modificationDate) + "\n" +
+                "Note is marked as done: " + markedAsFinished + "\n" +
+                "Note is pinned to favorite: " + pinnedAsFavorite + "\n" +
+                "Hashtags " + hashtagList.toString();
     }
 }
