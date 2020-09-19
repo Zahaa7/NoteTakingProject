@@ -1,18 +1,29 @@
 package ro.jademy.notetaking.model;
 
-public class Note {  // a note's blueprint
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+public class Note {
 
     private String title;
     private String body;
-    private TimeStamp timestamp;
+    private long creationDate;
+    private long modificationDate;
+    private boolean markedAsFinished;
+    private boolean pinnedAsFavorite;
+    private Category category;
+    private List<String> hashtagList;
 
-    public Note() {
-    }
-
-    public Note(String title, String body, TimeStamp timestamp) {
+    public Note(String title, String body, long creationDate, long modificationDate, boolean markedAsFinished,
+                boolean pinnedAsFavorite, Category category, List<String> hashtagList) {
         this.title = title;
         this.body = body;
-        this.timestamp = timestamp;
+        this.creationDate = creationDate;
+        this.modificationDate = modificationDate;
+        this.markedAsFinished = markedAsFinished;
+        this.pinnedAsFavorite = pinnedAsFavorite;
+        this.category = category;
+        this.hashtagList = hashtagList;
     }
 
     public String getTitle() {
@@ -31,22 +42,62 @@ public class Note {  // a note's blueprint
         this.body = body;
     }
 
-    public TimeStamp getTimestamp() {
-        return timestamp;
+    public long getCreationDate() {
+        return creationDate;
     }
 
-    public void setTimestamp(TimeStamp timestamp) {
-        this.timestamp = timestamp;
+    public void setCreationDate(long creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public long getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(long modificationDate) {
+        this.modificationDate = modificationDate;
+    }
+
+    public boolean isMarkedAsFinished() {
+        return markedAsFinished;
+    }
+
+    public void setMarkedAsFinished(boolean markedAsFinished) {
+        this.markedAsFinished = markedAsFinished;
+    }
+
+    public boolean isPinnedAsFavorite() {
+        return pinnedAsFavorite;
+    }
+
+    public void setPinnedAsFavorite(boolean pinnedAsFavorite) {
+        this.pinnedAsFavorite = pinnedAsFavorite;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<String> getHashtagList() {
+        return hashtagList;
+    }
+
+    public void setHashtagList(List<String> hashtagList) {
+        this.hashtagList = hashtagList;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n~~~~~ Note Details ~~~~~\n");
-        sb.append("Title: " + getTitle() + "\n");
-        sb.append("Body: " + getBody() + "\n");
-        sb.append(getTimestamp().toString() +"\n");
-        sb.append("~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        return sb.toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd/MMM/yyyy HH:mm a");
+        return title + "\n" +
+                "Created on " + sdf.format(creationDate) + "\n" +
+                "Last modified on" + sdf.format(modificationDate) + "\n" +
+                body + "\n" +
+                "Note is marked as done :"+markedAsFinished+"\n"+
+                "Hashtags " + hashtagList.toString() + "."+"\n\n";
     }
 }

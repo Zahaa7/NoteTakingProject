@@ -1,0 +1,35 @@
+[
+
+  {
+    "title": "Grocery List",
+    "body": "Bakery & bread, meat, seafood, pasta, rice, cheese and some eggs.",
+    "creationDate": "1600510979745",
+    "modificationDate": "1600510979745",
+    "markedAsFinished" : false,
+    "pinnedAsFavorite" : false,
+    "category": "SHOPPING",
+    "hashtagList": ["#grocery", "#bestProducts", "bioFood", "#TODO"]
+  },
+
+  {"title": "Features to Note Taking Project",
+    "body": "TODO: Implement a category enum and a pin to favorite functionality",
+    "creationDate": "1600511350825",
+    "modificationDate": "1600511350825",
+    "markedAsFinished" : false,
+    "pinnedAsFavorite" : false,
+    "category": "WORK",
+    "hashtagList": ["#project", "#implementation", "#feature", "#TODO"]
+  },
+
+  {
+    "title": "Gym Program",
+    "body": "Warm up, Bench press - 5 sets, 10 reps, rest: 1 min, Triceps dip - 5 sets, 6-10 reps, rest 1/5 min",
+    "creationDate": "1600511431640",
+    "modificationDate": "1600511431640",
+    "markedAsFinished" : false,
+    "pinnedAsFavorite" : true,
+    "category": "PERSONAL",
+    "hashtagList": ["#goHardOrGoHome", "#noPainNoGain", "#workouts"]
+  }
+
+]
