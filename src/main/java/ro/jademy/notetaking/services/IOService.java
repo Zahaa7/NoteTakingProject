@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import ro.jademy.notetaking.Main;
 import ro.jademy.notetaking.models.Category;
 import ro.jademy.notetaking.models.Note;
+
 import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -49,27 +50,31 @@ public class IOService {
     }
 
     public void writeJson(List<Note> noteList, File file) {
-        JSONArray jsonArray = new JSONArray();
-        try {
-            FileWriter fileWriter = new FileWriter(file);
-            for (Note note : noteList) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("title", note.getTitle());
-                jsonObject.put("body", note.getBody());
-                jsonObject.put("creationDate", note.getCreationDate());
-                jsonObject.put("modificationDate", note.getModificationDate());
-                jsonObject.put("markedAsFinished", note.isMarkedAsFinished());
-                jsonObject.put("pinnedAsFavorite", note.isPinnedAsFavorite());
-                jsonObject.put("category", note.getCategory().getCategoryName());
-                jsonObject.put("hashtagList", note.getHashtagList());
-                jsonArray.add(jsonObject);
+        Runnable runnable = () -> {
+            JSONArray jsonArray = new JSONArray();
+            try {
+                FileWriter fileWriter = new FileWriter(file);
+                for (Note note : noteList) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("title", note.getTitle());
+                    jsonObject.put("body", note.getBody());
+                    jsonObject.put("creationDate", note.getCreationDate());
+                    jsonObject.put("modificationDate", note.getModificationDate());
+                    jsonObject.put("markedAsFinished", note.isMarkedAsFinished());
+                    jsonObject.put("pinnedAsFavorite", note.isPinnedAsFavorite());
+                    jsonObject.put("category", note.getCategory().getCategoryName());
+                    jsonObject.put("hashtagList", note.getHashtagList());
+                    jsonArray.add(jsonObject);
+                }
+                fileWriter.write(jsonArray.toJSONString());
+                System.out.println("File written successfully!");
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
-            fileWriter.write(jsonArray.toJSONString());
-            System.out.println("File written successfully!");
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 }
