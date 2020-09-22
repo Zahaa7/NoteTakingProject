@@ -113,12 +113,14 @@ public class NoteApp {
         System.out.println("        |  1. Title                 |        ");
         System.out.println("        |  2. Body                  |        ");
         System.out.println("        |  3. Hashtag/s             |        ");
-        System.out.println("        |  4. Return to Main Menu   |        ");
+        System.out.println("        |  4. Category              |        ");
+        System.out.println("        |  5. Return to Main Menu   |        ");
         System.out.println("        +---------------------------+        ");
     }
 
-    private void printNotes(List<Note> noteList) {
+    private List<Note> printNotes(List<Note> noteList) {
         noteList.forEach(System.out::println);
+        return noteList;
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Note Creation Implementation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
@@ -180,20 +182,17 @@ public class NoteApp {
                 System.out.println("Title:");
                 input.skip("\n");
                 keyword = input.nextLine();
-                printNotes(searchNoteByTitle(keyword));
-                break;
+                return printNotes(searchNoteByTitle(keyword));
             case 2: // Search by note's hashtag/s
                 System.out.println("Hashtag:");
                 input.skip("\n");
                 keyword = input.nextLine();
-                printNotes(searchNoteByHashtag(keyword));
-                break;
+                return printNotes(searchNoteByHashtag(keyword));
             case 3: // Search by a given keyword
                 System.out.println("Keyword:");
                 input.skip("\n");
                 keyword = input.nextLine();
-                printNotes(searchNoteByKeyword(keyword));
-                break;
+                return printNotes(searchNoteByKeyword(keyword));
             case 4: // Return to Main Menu
                 initiateNoteApp();
                 break;
@@ -255,7 +254,10 @@ public class NoteApp {
                 keyword = input.nextLine();
                 editHashtag(currentNote, keyword);
                 break;
-            case 4: // Return to Main Menu
+            case 4: // Edit note's category
+                //TODO implement change category
+                break;
+            case 5: // Return to Main Menu
                 initiateNoteApp();
                 break;
             default: // For invalid inputs
@@ -265,9 +267,9 @@ public class NoteApp {
 
     private Note selectNote(List<Note> notes) {
         for (int i = 0; i < notes.size(); i++) {
-            System.out.println((i + 1) + notes.get(0).getTitle());
+            System.out.println((i + 1) + " - " + notes.get(i).getTitle());
         }
-        System.out.println("Select only one note:");
+        System.out.println("Select the number of a single note:");
         byte selectedNote = input.nextByte();
         return notes.get(selectedNote - 1);
     }
@@ -283,7 +285,11 @@ public class NoteApp {
     }
 
     private void editHashtag(Note note, String hashtag) {
-        List<String> hashtags = new ArrayList<>(Arrays.asList(hashtag.split("#")));
+        List<String> hashtags = new ArrayList<>(Arrays.asList(hashtag.replace(" ", "")
+                .split(",")));
+        for (int i = 0; i < hashtags.size(); i++) {
+            hashtags.set(i, "#" + hashtags.get(i));
+        }
         note.setHashtagList(hashtags);
         note.setModificationDate(System.currentTimeMillis());
     }
