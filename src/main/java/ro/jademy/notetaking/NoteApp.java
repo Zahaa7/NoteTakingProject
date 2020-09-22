@@ -234,7 +234,7 @@ public class NoteApp {
         System.out.println("Enter an option:");
         displayEditMenu();
         byte option = input.nextByte();
-        String keyword;
+        String keyword = "";
         switch (option) {
             case 1: // Edit note's title
                 System.out.println("New Title:");
@@ -255,7 +255,7 @@ public class NoteApp {
                 editHashtag(currentNote, keyword);
                 break;
             case 4: // Edit note's category
-                //TODO implement change category
+                editCategory(currentNote, keyword);
                 break;
             case 5: // Return to Main Menu
                 initiateNoteApp();
@@ -292,5 +292,23 @@ public class NoteApp {
         }
         note.setHashtagList(hashtags);
         note.setModificationDate(System.currentTimeMillis());
+    }
+
+    private void editCategory(Note note, String keyword) {
+        System.out.println("Current category is: " + note.getCategory().getCategoryName());
+        System.out.println("New Category:");
+        input.skip("\n");
+        keyword = input.nextLine();
+        if (keyword.equalsIgnoreCase(Category.SHOPPING.getCategoryName())) {
+            note.setCategory(Category.SHOPPING);
+        } else if (keyword.equalsIgnoreCase(Category.TRAVEL.getCategoryName())) {
+            note.setCategory(Category.TRAVEL);
+        } else if (keyword.equalsIgnoreCase(Category.PERSONAL.getCategoryName())) {
+            note.setCategory(Category.PERSONAL);
+        } else if (keyword.equalsIgnoreCase(Category.WORK.getCategoryName())) {
+            note.setCategory(Category.WORK);
+        } else {
+            System.out.println("This category doesn't exist!");
+        }
     }
 }
