@@ -6,9 +6,11 @@ import ro.jademy.notetaking.services.IOService;
 import ro.jademy.notetaking.services.SortingService;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class NoteApp {
 
@@ -36,7 +38,7 @@ public class NoteApp {
                     viewMenu();
                     break;
                 case 3: // Search a note By
-
+                    searchMenu();
                     break;
                 case 4: // Display All Notes
                     printNotes(noteList);
@@ -53,7 +55,7 @@ public class NoteApp {
         } while (true);
     }
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Menu Printing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Printing Implementation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     private void displayMainMenu() {
         System.out.println();
         System.out.println("+---------------------------------------------+");
@@ -106,6 +108,7 @@ public class NoteApp {
         noteList.forEach(System.out::println);
     }
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Note Creation Implementation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     private void createNewNote() {
         System.out.println("Title:");
         input.skip("\n");
@@ -121,6 +124,7 @@ public class NoteApp {
                 false, false, Category.NO_CATEGORY, Arrays.asList(hashtags)));
     }
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ View Menu Implementation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
     private void viewMenu() {
         displayViewMenu();
         byte option = input.nextByte();
@@ -149,5 +153,56 @@ public class NoteApp {
             default: // For invalid inputs
                 System.out.println("Invalid input. Please, choose between [1-7] only!");
         }
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Search Menu Implementation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    private List<Note> searchMenu() {
+        displaySearchMenu();
+        byte option = input.nextByte();
+        String keyword;
+        switch (option) {
+            case 1: // Search by note's title
+                System.out.println("Title:");
+                keyword = input.nextLine();
+                return searchNoteByTitle(keyword);
+            case 2: // Search by note's hashtag/s
+                System.out.println("Hashtag:");
+                keyword = input.nextLine();
+                return searchNoteByHashtag(keyword);
+            case 3: // Search by a given keyword
+                System.out.println("Keyword:");
+                keyword = input.nextLine();
+                return searchNoteByKeyword(keyword);
+            case 4: // Return to Main Menu
+                initiateNoteApp();
+                break;
+            default: // For invalid inputs
+                System.out.println("Invalid input. Please, choose between [1-4] only!");
+        }
+        return null;
+    }
+
+    private List<Note> searchNoteByTitle(String keyword) {
+        return noteList.stream()
+                .filter(note -> note.getTitle().contains(keyword)).distinct().collect(Collectors.toList());
+    }
+
+    private List<Note> searchNoteByHashtag(String keyword) {
+        List<Note> tempList = new ArrayList<>();
+        for (Note note : noteList) {
+            for (String hashtag : note.getHashtagList()) {
+                if (hashtag.equalsIgnoreCase(keyword)) {
+                    tempList.add(note);
+                } else {
+                    System.out.println("No Notes with those hashtags!");
+                }
+            }
+        }
+        return tempList;
+    }
+
+    private List<Note> searchNoteByKeyword(String keyword) {
+        return noteList.stream()
+                .filter(note -> note.getBody().contains(keyword)).distinct().collect(Collectors.toList());
     }
 }
