@@ -1,35 +1,59 @@
 [
-
   {
+    "modificationDate": 1600510979745,
+    "pinnedAsFavorite": false,
+    "hashtagList": [
+      "#grocery",
+      "#bestProducts",
+      "bioFood",
+      "#TODO"
+    ],
+    "markedAsFinished": false,
     "title": "Grocery List",
     "body": "Bakery & bread, meat, seafood, pasta, rice, cheese and some eggs.",
-    "creationDate": "1600510979745",
-    "modificationDate": "1600510979745",
-    "markedAsFinished" : false,
-    "pinnedAsFavorite" : false,
-    "category": "SHOPPING",
-    "hashtagList": ["#grocery", "#bestProducts", "bioFood", "#TODO"]
+    "creationDate": 1600510979745,
+    "category": "SHOPPING"
   },
-
-  {"title": "Features to Note Taking Project",
-    "body": "Implement a category enum and a pin to favorite functionality",
-    "creationDate": "1600511350825",
-    "modificationDate": "1600511350825",
-    "markedAsFinished" : false,
-    "pinnedAsFavorite" : false,
-    "category": "WORK",
-    "hashtagList": ["#project", "#implementation", "#feature", "#TODO"]
-  },
-
   {
+    "modificationDate": 1600511350825,
+    "pinnedAsFavorite": false,
+    "hashtagList": [
+      "#project",
+      "#implementation",
+      "#feature",
+      "#TODO"
+    ],
+    "markedAsFinished": false,
+    "title": "Features to Note Taking Project",
+    "body": "Implement a category enum and a pin to favorite functionality",
+    "creationDate": 1600511350825,
+    "category": "WORK"
+  },
+  {
+    "modificationDate": 1600511431640,
+    "pinnedAsFavorite": true,
+    "hashtagList": [
+      "#goHardOrGoHome",
+      "#noPainNoGain",
+      "#workouts"
+    ],
+    "markedAsFinished": false,
     "title": "Gym Program",
-    "body": "Warm up, Bench press - 5 sets, 10 reps, rest: 1 min, Triceps dip - 5 sets, 6-10 reps, rest 1/5 min",
-    "creationDate": "1600511431640",
-    "modificationDate": "1600511431640",
-    "markedAsFinished" : false,
-    "pinnedAsFavorite" : true,
-    "category": "PERSONAL",
-    "hashtagList": ["#goHardOrGoHome", "#noPainNoGain", "#workouts"]
+    "body": "Warm up, Bench press - 5 sets, 10 reps, rest: 1 min, Triceps dip - 5 sets, 6-10 reps, rest 1\/5 min",
+    "creationDate": 1600511431640,
+    "category": "PERSONAL"
+  },
+  {
+    "modificationDate": 1600713178125,
+    "pinnedAsFavorite": false,
+    "hashtagList": [
+      "#todo",
+      "#test"
+    ],
+    "markedAsFinished": false,
+    "title": "test title",
+    "body": "test body",
+    "creationDate": 1600713178125,
+    "category": "NO CATEGORY"
   }
-
 ]

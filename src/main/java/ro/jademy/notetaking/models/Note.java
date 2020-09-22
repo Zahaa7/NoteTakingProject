@@ -93,13 +93,14 @@ public class Note {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd/MMM/yyyy HH:mm a", Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE dd/MMM/yyyy | HH:mm a", Locale.ENGLISH);
         return "\n" + title + "\n" +
                 body + "\n" +
                 "Created on: " + sdf.format(creationDate) + "\n" +
                 "Last modified on: " + sdf.format(modificationDate) + "\n" +
                 "Note is marked as done: " + markedAsFinished + "\n" +
                 "Note is pinned to favorite: " + pinnedAsFavorite + "\n" +
+                "Category: " + category.getCategoryName() + "\n" +
                 "Hashtags " + hashtagList.toString();
     }
 }
